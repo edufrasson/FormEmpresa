@@ -1,6 +1,6 @@
 ﻿namespace FormEmpresa
 {
-    partial class Form1
+    partial class FrmMenu
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FrmMenu
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "FrmMenu";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FrmMenu_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
