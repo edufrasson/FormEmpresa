@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FormEmpresa.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,13 @@ namespace FormEmpresa
         private void FrmMenu_Load(object sender, EventArgs e)
         {
             Banco.CriarBanco();
+        }
+
+        private void cidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCidade frmCidade = new FrmCidade();
+            frmCidade.Show();
+            
         }
     }
 }
