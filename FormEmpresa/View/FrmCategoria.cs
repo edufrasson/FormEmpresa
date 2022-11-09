@@ -6,16 +6,16 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace FormEmpresa.View
 {
-    public partial class FrmMarca : Form
+    public partial class FrmCategoria : Form
     {
-        Marca marca;
-        public FrmMarca()
+        Categoria categoria;
+        public FrmCategoria()
         {
             InitializeComponent();
         }
@@ -24,18 +24,18 @@ namespace FormEmpresa.View
         {
             txtId.Clear();
             txtDescricao.Clear();
-           
+
             txtPesquisa.Clear();
         }
 
         void carregarGrid(string pesquisa)
         {
-            marca = new Marca()
+            categoria = new Categoria()
             {
                 Descricao = pesquisa
             };
 
-            dgvMarca.DataSource = marca.Consultar();
+            dgvCategoria.DataSource = categoria.Consultar();
         }
 
         private void btnIncluir_Click(object sender, EventArgs e)
@@ -43,12 +43,12 @@ namespace FormEmpresa.View
             if (txtDescricao.Text == String.Empty)
                 return;
 
-            marca = new Marca()
+            categoria = new Categoria()
             {
-                Descricao = txtDescricao.Text                
+                Descricao = txtDescricao.Text
             };
 
-            marca.Incluir();
+            categoria.Incluir();
 
             limpaControles();
             carregarGrid("");
@@ -59,13 +59,13 @@ namespace FormEmpresa.View
             if (txtId.Text == String.Empty)
                 return;
 
-            marca = new Marca()
+            categoria = new Categoria()
             {
                 Id = int.Parse(txtId.Text),
                 Descricao = txtDescricao.Text,
-                
+
             };
-            marca.Alterar();
+            categoria.Alterar();
 
             limpaControles();
             carregarGrid("");
@@ -73,6 +73,7 @@ namespace FormEmpresa.View
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+
             limpaControles();
             carregarGrid("");
         }
@@ -82,15 +83,15 @@ namespace FormEmpresa.View
             if (txtId.Text == "")
                 return;
 
-            if (MessageBox.Show("Deseja excluir a marca?", "Excluir",
+            if (MessageBox.Show("Deseja excluir a categoria?", "Excluir",
                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                marca = new Marca()
+                categoria = new Categoria()
                 {
                     Id = int.Parse(txtId.Text)
                 };
 
-                marca.Excluir();
+                categoria.Excluir();
 
                 limpaControles();
                 carregarGrid("");
@@ -107,13 +108,14 @@ namespace FormEmpresa.View
             carregarGrid(txtPesquisa.Text);
         }
 
-        private void dgvMarca_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCategoria_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvMarca.RowCount > 0)
+            if (dgvCategoria.RowCount > 0)
             {
-                txtId.Text = dgvMarca.CurrentRow.Cells["id"].Value.ToString();
-                txtDescricao.Text = dgvMarca.CurrentRow.Cells["descricao"].Value.ToString();               
+                txtId.Text = dgvCategoria.CurrentRow.Cells["id"].Value.ToString();
+                txtDescricao.Text = dgvCategoria.CurrentRow.Cells["descricao"].Value.ToString();
             }
+
         }
     }
 }

@@ -60,14 +60,14 @@ namespace FormEmpresa
 
                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Marca(" +
                                            "id int auto_increment, " +
-                                           "marca varchar(100), "
+                                           "descricao varchar(100), "
                                             + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();
 
                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Categoria(" +
                                            "id int auto_increment, " +
-                                           "categoria varchar(100), "
+                                           "descricao varchar(100), "
                                             + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();

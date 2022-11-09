@@ -32,7 +32,14 @@ namespace FormEmpresa
 
         private void marcaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            FrmMarca frmMarca = new FrmMarca();
+            frmMarca.Show();
+        }
 
+        private void categoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCategoria frmCategoria = new FrmCategoria();
+            frmCategoria.Show();
         }
     }
 }
