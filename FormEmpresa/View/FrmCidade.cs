@@ -17,6 +17,7 @@ namespace FormEmpresa.View
         public FrmCidade()
         {
             InitializeComponent();
+            carregarGrid("");
         }
 
         void limpaControles()
