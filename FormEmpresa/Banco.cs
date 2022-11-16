@@ -53,7 +53,7 @@ namespace FormEmpresa
 
                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Cidade(" +
                                             "id int auto_increment, " +  
-                                            "nome varchar(100), " +
+                                            "nome_cidade varchar(100), " +
                                             "uf char(2), " + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();
@@ -68,6 +68,19 @@ namespace FormEmpresa
                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Categoria(" +
                                            "id int auto_increment, " +
                                            "descricao varchar(100), "
+                                            + "primary key(id)); ", Conexao);
+
+                Comando.ExecuteNonQuery();
+
+                Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Cliente(" +
+                                           "id int auto_increment, " +
+                                           "nome varchar(100), " +
+                                           "id_cidade int, " +
+                                           "dataNasc date," +
+                                           "renda decimal(10, 2)," +
+                                           "cpf varchar(14)," +
+                                           "foto varchar(100)," +
+                                           "venda boolean,"
                                             + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();

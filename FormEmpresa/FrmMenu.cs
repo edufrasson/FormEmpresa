@@ -41,5 +41,11 @@ namespace FormEmpresa
             FrmCategoria frmCategoria = new FrmCategoria();
             frmCategoria.Show();
         }
+
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCliente frmCliente = new FrmCliente();
+            frmCliente.Show();
+        }
     }
 }

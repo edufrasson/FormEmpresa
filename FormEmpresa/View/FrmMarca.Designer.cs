@@ -55,6 +55,7 @@
             this.dgvMarca.Size = new System.Drawing.Size(719, 150);
             this.dgvMarca.TabIndex = 25;
             this.dgvMarca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMarca_CellClick);
+            this.dgvMarca.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMarca_CellContentClick);
             // 
             // btnFechar
             // 
@@ -127,6 +128,7 @@
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.Size = new System.Drawing.Size(488, 20);
             this.txtDescricao.TabIndex = 17;
+            this.txtDescricao.TextChanged += new System.EventHandler(this.txtDescricao_TextChanged);
             // 
             // label2
             // 
@@ -136,6 +138,7 @@
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 16;
             this.label2.Text = "Marca";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtId
             // 
@@ -144,6 +147,7 @@
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(77, 20);
             this.txtId.TabIndex = 15;
+            this.txtId.TextChanged += new System.EventHandler(this.txtId_TextChanged);
             // 
             // label1
             // 
@@ -153,6 +157,7 @@
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 14;
             this.label1.Text = "Código";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // groupBox1
             // 
@@ -164,6 +169,7 @@
             this.groupBox1.Size = new System.Drawing.Size(729, 253);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // btnPesquisar
             // 
