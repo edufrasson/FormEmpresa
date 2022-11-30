@@ -113,7 +113,7 @@ namespace FormEmpresa.View
             if (dgvCategoria.RowCount > 0)
             {
                 txtId.Text = dgvCategoria.CurrentRow.Cells["id"].Value.ToString();
-                txtDescricao.Text = dgvCategoria.CurrentRow.Cells["descricao"].Value.ToString();
+                txtDescricao.Text = dgvCategoria.CurrentRow.Cells["descricao_categoria"].Value.ToString();
             }
 
         }

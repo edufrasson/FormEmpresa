@@ -20,7 +20,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("INSERT INTO Categoria (descricao) VALUES (@desc)", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("INSERT INTO Categoria (descricao_categoria) VALUES (@desc)", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@desc", Descricao);
 
@@ -41,7 +41,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("UPDATE Categoria SET descricao = @desc WHERE id = @id", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("UPDATE Categoria SET descricao_categoria = @desc WHERE id = @id", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@desc", Descricao);
                 Banco.Comando.Parameters.AddWithValue("@id", Id);
@@ -82,7 +82,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("SELECT * FROM Categoria WHERE descricao LIKE @Desc ORDER BY descricao", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("SELECT * FROM Categoria WHERE descricao_categoria LIKE @Desc ORDER BY descricao_categoria", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@Desc", "%" + Descricao + "%");
                 Banco.Adaptador = new MySqlDataAdapter(Banco.Comando);

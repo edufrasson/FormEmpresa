@@ -9,10 +9,15 @@ using System.Windows.Forms;
 
 namespace FormEmpresa.Model
 {
-    public class Marca
+    public class Produto
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
+        public double Valor { get; set; }
+        public int Estoque { get; set; }
+        public int Id_Categoria { get; set; }
+        public int Id_Marca { get; set; }
+        public string Foto { get; set; }
 
         public void Incluir()
         {
@@ -20,9 +25,14 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("INSERT INTO Marca (descricao_marca) VALUES (@desc)", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("INSERT INTO Produto (descricao, valor, estoque,  id_categoria, id_marca, foto) VALUES (@descricao, @valor, @estoque, @id_categoria, @id_marca, @foto)", Banco.Conexao);
 
-                Banco.Comando.Parameters.AddWithValue("@desc", Descricao);                
+                Banco.Comando.Parameters.AddWithValue("@descricao", Descricao);
+                Banco.Comando.Parameters.AddWithValue("@valor", Valor);
+                Banco.Comando.Parameters.AddWithValue("@estoque", Estoque);
+                Banco.Comando.Parameters.AddWithValue("@id_categoria", Id_Categoria);
+                Banco.Comando.Parameters.AddWithValue("@id_marca", Id_Marca);
+                Banco.Comando.Parameters.AddWithValue("@foto", Foto);                
 
                 Banco.Comando.ExecuteNonQuery();
 
@@ -41,9 +51,14 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("UPDATE Marca SET descricao_marca = @desc WHERE id = @id", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("UPDATE Produto SET descricao = @descricao, valor = @valor, estoque = @estoque, id_categoria = @id_categoria, id_marca = @id_marca, foto = @foto WHERE id = @id", Banco.Conexao);
 
-                Banco.Comando.Parameters.AddWithValue("@desc", Descricao);
+                Banco.Comando.Parameters.AddWithValue("@descricao", Descricao);
+                Banco.Comando.Parameters.AddWithValue("@valor", Valor);
+                Banco.Comando.Parameters.AddWithValue("@estoque", Estoque);
+                Banco.Comando.Parameters.AddWithValue("@id_categoria", Id_Categoria);
+                Banco.Comando.Parameters.AddWithValue("@id_marca", Id_Marca);
+                Banco.Comando.Parameters.AddWithValue("@foto", Foto);
                 Banco.Comando.Parameters.AddWithValue("@id", Id);
 
                 Banco.Comando.ExecuteNonQuery();
@@ -62,7 +77,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("DELETE FROM Marca WHERE id = @id", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("DELETE FROM Produto WHERE id = @id", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@id", Id);
 
@@ -82,9 +97,9 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("SELECT * FROM Marca WHERE descricao_marca LIKE @Desc ORDER BY descricao_marca", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("SELECT p.*, m.descricao_marca, c.descricao_categoria FROM Produto p JOIN Categoria c on (c.id = p.id_categoria) JOIN Marca m on (m.id = p.id_marca) WHERE p.descricao LIKE @descricao ORDER BY p.descricao", Banco.Conexao);
 
-                Banco.Comando.Parameters.AddWithValue("@Desc", "%" + Descricao + "%");
+                Banco.Comando.Parameters.AddWithValue("@descricao", "%" + Descricao + "%");
                 Banco.Adaptador = new MySqlDataAdapter(Banco.Comando);
                 Banco.datTabela = new DataTable();
                 Banco.Adaptador.Fill(Banco.datTabela);

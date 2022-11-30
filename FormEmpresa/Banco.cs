@@ -23,12 +23,29 @@ namespace FormEmpresa
             {
 
                 Conexao = new MySqlConnection("server=localhost;port=3307;uid=root;pwd=etecjau");
-                Conexao.Open();
+                Conexao.Open();               
+                
 
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public static void UsarBanco()
+        {
+            try
+            {
+                AbrirConexao();
+                MySqlCommand Comando = new MySqlCommand("USE db_empresa;");
+                Comando.ExecuteNonQuery();
+                FecharConexao();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         public static void FecharConexao()
@@ -60,14 +77,14 @@ namespace FormEmpresa
 
                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Marca(" +
                                            "id int auto_increment, " +
-                                           "descricao varchar(100), "
+                                           "descricao_marca varchar(100), "
                                             + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();
 
                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Categoria(" +
                                            "id int auto_increment, " +
-                                           "descricao varchar(100), "
+                                           "descricao_categoria varchar(100), "
                                             + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();
@@ -81,6 +98,18 @@ namespace FormEmpresa
                                            "cpf varchar(14)," +
                                            "foto varchar(100)," +
                                            "venda boolean,"
+                                            + "primary key(id)); ", Conexao);
+
+                Comando.ExecuteNonQuery();
+
+                 Comando = new MySqlCommand("CREATE TABLE IF NOT EXISTS Produto(" +
+                                           "id int auto_increment, " +
+                                           "descricao varchar(100), " +
+                                           "id_categoria int, " +
+                                           "id_marca int, " +
+                                           "estoque int," +
+                                           "foto varchar(100)," +
+                                           "valor decimal(10, 2),"                                       
                                             + "primary key(id)); ", Conexao);
 
                 Comando.ExecuteNonQuery();

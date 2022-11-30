@@ -62,7 +62,7 @@ namespace FormEmpresa.View
             if(dgvCidades.RowCount > 0)
             {
                 txtId.Text = dgvCidades.CurrentRow.Cells["id"].Value.ToString();
-                txtNome.Text = dgvCidades.CurrentRow.Cells["nome"].Value.ToString();
+                txtNome.Text = dgvCidades.CurrentRow.Cells["nome_cidade"].Value.ToString();
                 txtUf.Text = dgvCidades.CurrentRow.Cells["uf"].Value.ToString();
             }
         }

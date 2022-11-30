@@ -14,7 +14,7 @@ namespace FormEmpresa.Model
         public int Id { get; set; }
         public string Nome { get; set; }
         public int Id_Cidade { get; set; }
-        public int CPF { get; set; }
+        public string CPF { get; set; }
         public DateTime DataNasc { get; set; }
         public double Renda { get; set; }
         public string Foto { get; set; }
@@ -53,7 +53,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("UPDATE cidade SET nome = @nome, id_cidade = @id_cidade, cpf = @cpf, dataNasc = @dataNasc, renda = @renda, venda = @venda WHERE id = @id", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("UPDATE cliente SET nome = @nome, id_cidade = @id_cidade, cpf = @cpf, dataNasc = @dataNasc, renda = @renda, venda = @venda WHERE id = @id", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@nome", Nome);
                 Banco.Comando.Parameters.AddWithValue("@id_cidade", Id_Cidade);
@@ -99,7 +99,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("SELECT * FROM Cliente WHERE nome LIKE @Nome ORDER BY nome", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("SELECT cl.*, c.nome_cidade, c.uf FROM Cliente cl JOIN Cidade c on (c.id = cl.id_cidade) WHERE nome LIKE @Nome ORDER BY nome", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@Nome", "%" + Nome + "%");
                 Banco.Adaptador = new MySqlDataAdapter(Banco.Comando);

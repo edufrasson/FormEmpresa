@@ -85,7 +85,7 @@ namespace FormEmpresa.Model
             {
                 Banco.AbrirConexao();
 
-                Banco.Comando = new MySqlCommand("SELECT * FROM cidade WHERE nome_cidade LIKE @Nome ORDER BY nome", Banco.Conexao);
+                Banco.Comando = new MySqlCommand("SELECT * FROM cidade WHERE nome_cidade LIKE @Nome ORDER BY nome_cidade", Banco.Conexao);
 
                 Banco.Comando.Parameters.AddWithValue("@Nome", "%" + Nome + "%");
                 Banco.Adaptador = new MySqlDataAdapter(Banco.Comando);

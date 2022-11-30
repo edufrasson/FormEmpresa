@@ -19,6 +19,7 @@ namespace FormEmpresa.View
         {
             
             InitializeComponent();
+            carregarGrid("");
         }
 
         void limpaControles()
@@ -50,13 +51,11 @@ namespace FormEmpresa.View
         {
             cidade = new Cidade();
             cboCidade.DataSource = cidade.Consultar();
-            cboCidade.DisplayMember = "nome";
+            cboCidade.DisplayMember = "nome_cidade";
             cboCidade.ValueMember = "id";
 
-
-
-            dgvCliente.Columns["idCidade"].Visible = false;
-            dgvCliente.Columns["foto"].Visible = false;
+            //dgvCliente.Columns["idCidade"].Visible = false;
+            //dgvCliente.Columns["foto"].Visible = false;
         }
 
         private void dgvCliente_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -64,11 +63,11 @@ namespace FormEmpresa.View
             txtId.Text = dgvCliente.CurrentRow.Cells["id"].Value.ToString();
             txtNome.Text = dgvCliente.CurrentRow.Cells["nome"].Value.ToString();
             txtCPF.Text = dgvCliente.CurrentRow.Cells["cpf"].Value.ToString();
-            chkVenda.Checked = (bool)dgvCliente.CurrentRow.Cells["venda"].Value;
+            chkVenda.Checked = bool.Parse(dgvCliente.CurrentRow.Cells["venda"].Value.ToString());
             txtRenda.Text = dgvCliente.CurrentRow.Cells["renda"].Value.ToString();
             dtpDataNasc.Text = dgvCliente.CurrentRow.Cells["dataNasc"].Value.ToString();
             txtUF.Text = dgvCliente.CurrentRow.Cells["uf"].Value.ToString();
-            cboCidade.SelectedValue = dgvCliente.CurrentRow.Cells["nome_cidade"].Value.ToString();
+            cboCidade.Text = dgvCliente.CurrentRow.Cells["nome_cidade"].Value.ToString();
             pictureBox1.ImageLocation = dgvCliente.CurrentRow.Cells["foto"].Value.ToString();
         }
 
@@ -77,15 +76,15 @@ namespace FormEmpresa.View
             if (txtNome.Text == String.Empty)
                 return;
 
-            cliente = new Cliente()
-            {
+            cliente = new Cliente
+            {               
                 Nome = txtNome.Text,
-                Id_Cidade = (int)cboCidade.SelectedValue,
-                DataNasc = dtpDataNasc.Value,
+                CPF = txtCPF.Text,
                 Renda = double.Parse(txtRenda.Text),
                 Foto = pictureBox1.ImageLocation,
                 Venda = chkVenda.Checked,
-                CPF = int.Parse(txtCPF.Text),
+                DataNasc = dtpDataNasc.Value,
+                Id_Cidade = (int)cboCidade.SelectedValue
             };
 
             cliente.Incluir();
@@ -103,7 +102,7 @@ namespace FormEmpresa.View
             {
                 Id = int.Parse(txtId.Text),
                 Nome = txtNome.Text,
-                CPF = int.Parse(txtCPF.Text),
+                CPF = txtCPF.Text,
                 Renda = double.Parse(txtRenda.Text),
                 Foto = pictureBox1.ImageLocation,
                 Venda = chkVenda.Checked,
@@ -163,6 +162,11 @@ namespace FormEmpresa.View
                 DataRowView reg = (DataRowView)cboCidade.SelectedItem;
                 txtUF.Text = reg["uf"].ToString();
             }
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            carregarGrid(txtPesquisa.Text);
         }
     }
 }
